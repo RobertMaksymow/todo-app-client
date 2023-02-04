@@ -4,6 +4,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlineDone, MdOutlineRemoveDone } from "react-icons/md";
 import "./TodoItem.css";
 import TodoList from "./TodoList";
+import { updateTodo, deleteTodo } from "../api/todoAPI";
 import { useEffect, useRef, useState } from "react";
 
 type Props = {
@@ -26,16 +27,20 @@ const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
   };
 
   const handleDelete = (id: number) => {
+    deleteTodo(todo.id);
     setTodos(todos.filter((todo) => todo.id !== id));
-    // CALL FUNCTION TO DELETE FROM databasse HERE
   };
 
   const handleEditText = (event: React.FormEvent, id: number) => {
     event.preventDefault();
+    console.log(">>>>>> SET TODOS", todo.title);
     setTodos(
-      todos.map((todo) => (todo.id === id ? { ...todo, todo: editTodo } : todo))
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, title: editTodo } : todo
+      )
     );
     setEdit(false);
+    updateTodo({ id: id, title: editTodo, completed: false });
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -51,7 +56,7 @@ const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
       >
         {edit ? (
           <input
-            className="todos_single--text"
+            className="todos__single--text"
             ref={inputRef}
             value={editTodo}
             onChange={(event) => setEditTodo(event.target.value)}

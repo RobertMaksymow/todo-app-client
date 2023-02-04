@@ -11,7 +11,7 @@ export const loadTodos = () => {
   return data;
 };
 
-export const createTodo = (todo: any) => {
+export const createTodo = (todo: Todo_IF) => {
   return fetch(baseurl, {
     method: "POST",
     headers: {
@@ -29,22 +29,22 @@ export const createTodo = (todo: any) => {
 //   return fetch(`${baseurl}/${id}`).then((response) => response.json());
 // };
 
-// export const updateTodo = (todo) => {
-//   return fetch(`${baseurl}/${todo.id}`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       id: todo.id,
-//       title: todo.title,
-//       completed: todo.completed,
-//     }),
-//   }).then((response) => response.json());
-// };
+export const updateTodo = (todo: Todo_IF) => {
+  return fetch(`${baseurl}/${todo.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: todo.id,
+      title: todo.title,
+      completed: todo.completed,
+    }),
+  }).then((response) => response.json());
+};
 
-// export const deleteTodo = (id) => {
-//   return fetch(`${baseurl}/${id}`, {
-//     method: "DELETE",
-//   }).then((response) => response.json());
-// };
+export const deleteTodo = (id: number) => {
+  return fetch(`${baseurl}/${id}`, {
+    method: "DELETE",
+  }).then((response) => response.json());
+};
