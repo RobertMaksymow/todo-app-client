@@ -1,7 +1,8 @@
 .todos {
-  background-color: yellow;
+  background-color: rgb(196, 209, 211);
   /* display: flex; */
   justify-content: space-evenly;
-  width: 90%;
+  width: 80%;
+  border: 1px solid black;
   /* flex-wrap: wrap; */
 }

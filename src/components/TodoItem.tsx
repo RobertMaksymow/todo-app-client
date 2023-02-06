@@ -1,11 +1,11 @@
-import { Todo_IF, TodosApiResponse_IF } from "../types";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlineDone, MdOutlineRemoveDone } from "react-icons/md";
 import "./TodoItem.css";
-import TodoList from "./TodoList";
+import { Todo_IF } from "../types";
 import { updateTodo, deleteTodo } from "../api/todoAPI";
 import { useEffect, useRef, useState } from "react";
+import SelectPriority from "./SelectPriority";
 
 type Props = {
   todo: Todo_IF;
@@ -62,9 +62,13 @@ const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
             onChange={(event) => setEditTodo(event.target.value)}
           />
         ) : todo.completed ? (
-          <s className="todos__single--text">{todo.title}</s>
+          <s className="todos__single--text">
+            # {todo.id}, {todo.title}
+          </s>
         ) : (
-          <span className="todos__single--text">{todo.title}</span>
+          <span className="todos__single--text">
+            # {todo.id}, {todo.title}
+          </span>
         )}
 
         <div>
@@ -81,21 +85,23 @@ const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
             edit_
           </span>
           <span className="icon" onClick={() => handleDelete(todo.id)}>
-            {" "}
             <AiOutlineDelete />
             delete_
           </span>
           <span className="icon" onClick={() => handleDone(todo.id)}>
-            <MdOutlineDone /> <MdOutlineRemoveDone />
-            completed_
+            {todo.completed === true ? (
+              <MdOutlineRemoveDone />
+            ) : (
+              <MdOutlineDone />
+            )}
+            done_
           </span>
-          <span className="icon">priority_</span>
+          <span className="icon">
+            <SelectPriority />
+          </span>
         </div>
       </form>
-      <p>
-        # {todo.id}, {todo.title} {todo.completed}
-      </p>
-      {console.log("HERE", todo)}
+      {console.log("Here are single todos: ", todo)}
     </>
   );
 };

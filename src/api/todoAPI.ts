@@ -46,5 +46,9 @@ export const updateTodo = (todo: Todo_IF) => {
 export const deleteTodo = (id: number) => {
   return fetch(`${baseurl}/${id}`, {
     method: "DELETE",
-  }).then((response) => response.json());
+  }).then((response) =>
+    response.json().catch((error) => {
+      console.log(error);
+    })
+  );
 };

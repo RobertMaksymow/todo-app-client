@@ -7,7 +7,6 @@ interface Props {
 const InputField: React.FC<Props> = ({ todo, setTodo, handleAddTodo }) => {
   return (
     <>
-      <p>Input field here</p>
       <form className="input" onSubmit={handleAddTodo}>
         <input
           className="input__box"
