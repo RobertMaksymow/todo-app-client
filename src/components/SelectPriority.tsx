@@ -8,18 +8,19 @@ interface Props {
 }
 
 // const SelectPriority: React.FC<Props> = ({ todos }) => {
-const SelectPriority = (todos: any) => {
-  const [priority, setPriority] = useState();
+const SelectPriority = (todo: any) => {
+  const [priority, setPriority] = useState<number>();
 
   const handlePriorityChange = (event: any) => {
     setPriority(event.target.value);
     console.log(event.target.value);
-    // updateTodo({
-    //   id: todos.id,
-
-    //   // completed: false,
-    //   priority: todos.priority,
-    // });
+    updateTodo({
+      id: todo.id,
+      title: todo.title,
+      completed: todo.completed,
+      priority: priority,
+    });
+    console.log("Inside handle priority", todo);
   };
 
   return (

@@ -23,7 +23,6 @@ const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
-    // CALL FUNCTION TO CHANGE/UPDATE 'completed' field on databasse HERE
   };
 
   const handleDelete = (id: number) => {
@@ -38,14 +37,14 @@ const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
         todo.id === id ? { ...todo, title: editTodo } : todo
       )
     );
-    console.log(">>>>>> SET TODOS", todo.title);
     setEdit(false);
     updateTodo({
       id: id,
       title: editTodo,
       completed: false,
-      // priority: todo.priority,
+      priority: todo.priority,
     });
+    console.log("INSIDE HANDLE EDIT AND UPDATE", todo);
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -102,7 +101,7 @@ const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
             done
           </span>
           <span className="icon">
-            <SelectPriority />
+            <SelectPriority todos={todos} />
           </span>
         </div>
       </form>

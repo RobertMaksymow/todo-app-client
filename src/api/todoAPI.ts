@@ -1,4 +1,4 @@
-import { Todo_IF, TodosApiResponse_IF } from "../types";
+import { Todo_IF } from "../types";
 
 const baseurl = "/api/todos";
 
@@ -21,15 +21,18 @@ export const createTodo = (todo: Todo_IF) => {
       id: todo.id,
       title: todo.title,
       completed: todo.completed,
+      // priority: (todo.priority = 3),
+      priority: todo.priority,
     }),
-  }).then((response) => response.json());
+  })
+    .then((response) => response.json())
+    .then(() => {
+      console.log("CREATED TODO: ", todo);
+    });
 };
 
-// export const getTodo = (id) => {
-//   return fetch(`${baseurl}/${id}`).then((response) => response.json());
-// };
-
 export const updateTodo = (todo: Todo_IF) => {
+  console.log("UPDATE TODO: ", todo);
   return fetch(`${baseurl}/${todo.id}`, {
     method: "PUT",
     headers: {
@@ -39,6 +42,7 @@ export const updateTodo = (todo: Todo_IF) => {
       id: todo.id,
       title: todo.title,
       completed: todo.completed,
+      priority: todo.priority,
     }),
   }).then((response) => response.json());
 };
