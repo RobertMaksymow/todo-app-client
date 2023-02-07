@@ -28,7 +28,6 @@ function App() {
     });
   }, []);
 
-  console.log(todo);
   console.log("TODOS", todos);
   return (
     <div className="App">

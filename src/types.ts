@@ -6,12 +6,12 @@ export interface TodosApiResponse_IF {
 export interface Todo_IF {
   id: number;
   title: string;
-  priority?: Priority;
+  priority?: Priority_EN;
   completed?: boolean;
 }
 
-enum Priority {
-  Low = "Low",
-  Medium = "Medium",
-  High = "High",
+enum Priority_EN {
+  Low = 0,
+  Medium = 1,
+  High = 2,
 }

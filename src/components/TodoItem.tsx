@@ -33,14 +33,19 @@ const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
 
   const handleEditText = (event: React.FormEvent, id: number) => {
     event.preventDefault();
-    console.log(">>>>>> SET TODOS", todo.title);
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, title: editTodo } : todo
       )
     );
+    console.log(">>>>>> SET TODOS", todo.title);
     setEdit(false);
-    updateTodo({ id: id, title: editTodo, completed: false });
+    updateTodo({
+      id: id,
+      title: editTodo,
+      completed: false,
+      // priority: todo.priority,
+    });
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -49,9 +54,9 @@ const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
   }, [edit]);
 
   return (
-    <>
+    <div className="todo">
       <form
-        className="todos__single"
+        className="todos__single no-bullets"
         onSubmit={(event) => handleEditText(event, todo.id)}
       >
         {edit ? (
@@ -82,11 +87,11 @@ const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
             }}
           >
             <FiEdit />
-            edit_
+            edit
           </span>
           <span className="icon" onClick={() => handleDelete(todo.id)}>
             <AiOutlineDelete />
-            delete_
+            delete
           </span>
           <span className="icon" onClick={() => handleDone(todo.id)}>
             {todo.completed === true ? (
@@ -94,15 +99,14 @@ const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
             ) : (
               <MdOutlineDone />
             )}
-            done_
+            done
           </span>
           <span className="icon">
             <SelectPriority />
           </span>
         </div>
       </form>
-      {console.log("Here are single todos: ", todo)}
-    </>
+    </div>
   );
 };
 
